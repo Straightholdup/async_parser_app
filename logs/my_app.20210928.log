@@ -1,0 +1,37 @@
+2021-09-28 15:51:27,868 — INFO — CONFIG:
+channel: 192.168.1.169:24000
+source: askha
+debug_mode: True
+out_conn: None
+monitoring_conn: None
+2021-09-28 15:51:27,868 — INFO — Parser started in DEBUG MODE
+2021-09-28 15:54:28,004 — INFO — CONFIG:
+channel: 192.168.1.169:24000
+source: askha
+debug_mode: True
+out_conn: None
+monitoring_conn: None
+2021-09-28 15:54:28,004 — INFO — Parser started in DEBUG MODE
+2021-09-28 15:54:28,015 — INFO — Async request:
+url:https://www.google.ru/	proxy:http://adatadev21W4:X4v2KjB@5.180.103.67:34512
+2021-09-28 15:54:28,482 — INFO — Parser finished in DEBUG MODE
+2021-09-28 15:54:31,600 — INFO — CONFIG:
+channel: 192.168.1.169:24000
+source: askha
+debug_mode: True
+out_conn: None
+monitoring_conn: None
+2021-09-28 15:54:31,605 — INFO — Parser started in DEBUG MODE
+2021-09-28 15:54:31,605 — INFO — Async request:
+url:https://www.google.ru/	proxy:http://adatadev21W4:X4v2KjB@45.136.56.90:34512
+2021-09-28 15:54:32,215 — INFO — Parser finished in DEBUG MODE
+2021-09-28 15:55:53,469 — INFO — CONFIG:
+channel: 192.168.1.169:24000
+source: askha
+debug_mode: True
+out_conn: None
+monitoring_conn: None
+2021-09-28 15:55:53,469 — INFO — Parser started in DEBUG MODE
+2021-09-28 15:55:53,469 — INFO — Async request:
+url:https://www.google.com/	proxy:http://adatadev21W4:X4v2KjB@185.120.78.90:34512
+2021-09-28 15:55:53,879 — INFO — Parser finished in DEBUG MODE

@@ -3,16 +3,19 @@ import asyncio
 import aiohttp
 import json
 from . import async_safe_requests
-from .proxy import proxy_pack
 from . import logger_pack
 from . import db_pack
 import traceback
+import os
 
 class AsyncParserApp:
     def __init__(self,config_dir):
         if sys.version_info[0] == 3 and sys.version_info[1] >= 8 and sys.platform.startswith('win'):
             policy = asyncio.WindowsSelectorEventLoopPolicy()
             asyncio.set_event_loop_policy(policy)
+
+        if not os.path.exists(config_dir):
+            raise Exception(f"Config file directory does not exist: {config_dir}")
 
         self.initConfig(config_dir)
         self.logger = logger_pack.get_logger(self.config['source'])
