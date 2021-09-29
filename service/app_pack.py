@@ -5,17 +5,15 @@ import json
 from . import async_safe_requests
 from . import logger_pack
 from . import db_pack
+from . import services_pack
 import traceback
 import os
 
 class AsyncParserApp:
-    def __init__(self,config_dir):
+    def __init__(self,config_dir=None):
         if sys.version_info[0] == 3 and sys.version_info[1] >= 8 and sys.platform.startswith('win'):
             policy = asyncio.WindowsSelectorEventLoopPolicy()
             asyncio.set_event_loop_policy(policy)
-
-        if not os.path.exists(config_dir):
-            raise Exception(f"Config file directory does not exist: {config_dir}")
 
         self.initConfig(config_dir)
         self.logger = logger_pack.get_logger(self.config['source'])
@@ -29,6 +27,13 @@ class AsyncParserApp:
         self.loop.run_until_complete(self.asyncInit())
 
     def initConfig(self,config_dir):
+        if config_dir is None:
+            dirname = os.getcwd()
+            config_dir = os.path.join(dirname, 'config.json')
+
+        if not os.path.exists(config_dir):
+            raise Exception(f"Config file directory does not exist: {config_dir}")
+
         required_keys = [
             "out_conn",
             "monitoring_conn",
@@ -65,6 +70,8 @@ class AsyncParserApp:
             proxy_channel=self.config['channel'],
             proxy_source=self.config['source'],
             )
+        self.services = services_pack.Services(config=self.config,session=self.session,logger = self.logger)
+
 
     async def asyncDel(self):
         await self.session.close()

@@ -1,8 +1,5 @@
 import asyncio
 import traceback
-
-import aiohttp
-
 from .proxy import proxy_pack
 
 METH_GET = "GET"

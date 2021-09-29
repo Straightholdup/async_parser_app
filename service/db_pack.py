@@ -40,6 +40,7 @@ class Database:
         if not self.monitoring_conn:
             self.logger.warning("Monitoring is ignored. Remove debug_mode from config file or set to false")
             return
+
         query = f"""
              select parsed from monitoring.parser_monitoring
         where name = {self.monitoring_source_name}
