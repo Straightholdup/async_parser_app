@@ -5,8 +5,8 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 import re
 
-dirname = os.path.dirname(__file__)
-dirname = os.path.join(dirname, '../logs')
+dirname = os.getcwd()
+dirname = os.path.join(dirname, 'logs')
 
 if not os.path.exists(dirname):
     os.mkdir(dirname)
