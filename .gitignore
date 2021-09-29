@@ -2,3 +2,4 @@ venv
 .idea
 config.json
 logs
+**/__pycache__
