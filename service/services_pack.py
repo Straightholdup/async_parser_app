@@ -1,4 +1,5 @@
 import traceback
+import asyncio
 
 class Services:
     def __init__(self,config,session,logger):
@@ -6,10 +7,10 @@ class Services:
         self.session = session
         self.logger = logger
 
-    async def searchCompany(self,company_name):
-        if 'search_company_api' not in self.config:
-            raise Exception("Add search_company_api to config file")
+        self.companies = {}
+        self.search_locks = {}
 
+    async def __directSearchCompany(self,company_name):
         try:
             params = {"keyword": company_name}
             async with self.session.get(self.config['search_company_api'],params=params,verify_ssl=False) as resp:
@@ -26,3 +27,22 @@ class Services:
 
         except Exception as e:
             self.logger.warning(e,traceback.format_exc())
+
+    async def searchCompany(self,company_name):
+        if 'search_company_api' not in self.config:
+            raise Exception("Add search_company_api to config file")
+
+
+        if company_name in self.companies:
+            return self.companies[company_name]
+        elif company_name in self.search_locks:
+            async with self.search_locks[company_name]:
+                return self.companies[company_name]
+
+        self.search_locks[company_name] = asyncio.Lock()
+        async with self.search_locks[company_name]:
+            self.companies[company_name] = await self.__directSearchCompany(company_name)
+
+        del self.search_locks[company_name]
+        return self.companies[company_name]
+
